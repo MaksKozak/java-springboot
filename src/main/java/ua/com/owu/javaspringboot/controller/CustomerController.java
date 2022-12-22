@@ -60,9 +60,15 @@ public class CustomerController {
 
     @GetMapping("/name/{name}")
     public ResponseEntity<List<Customer>> getAllByName(@PathVariable String name) {
-
         return new ResponseEntity<>(customerDAO.getAllByName("Maks"), HttpStatusCode.valueOf(200));
+    }
 
+
+    @GetMapping("/activate/{id}")
+    public void activateCustomer(@PathVariable int id) {
+        Customer customer = customerServices.getCustomerById(id);
+        customer.setActivated(true);
+        customerServices.updateCustomer(customer);
     }
 
 }

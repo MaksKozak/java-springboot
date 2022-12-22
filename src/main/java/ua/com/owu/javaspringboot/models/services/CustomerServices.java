@@ -9,11 +9,19 @@ import ua.com.owu.javaspringboot.models.Customer;
 @AllArgsConstructor
 public class CustomerServices {
     private CustomerDAO customerDAO;
+
+    private MailServices mailServices;
+
     public void save(Customer customer) {
-        if (customer.getId()>0) {
-            customerDAO.save(customer);
-        }else {
-            throw new RuntimeException("id menshe 0 debil");
-        }
+        customerDAO.save(customer);
+        mailServices.send(customer);
     }
+
+    public Customer getCustomerById(int id) {
+        return customerDAO.findById(id).get();
+    }
+    public void updateCustomer (Customer customer) {
+        customerDAO.save(customer);
+    }
+
 }

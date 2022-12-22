@@ -19,16 +19,22 @@ import ua.com.owu.javaspringboot.models.views.Views;
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonView({Views.Admin.class})
+    @JsonView({Views.Admin.class, Views.Client.class})
     private int id;
+
     @NotEmpty
     @Length(min=3, max=13, message = "aaaaaaaaaaahhha")
     @JsonView({Views.Admin.class, Views.Client.class})
     private String name;
-    @JsonView({Views.Admin.class})
+
+    @JsonView({Views.Admin.class, Views.Client.class})
     private String surname;
-    @JsonView({Views.Admin.class})
+
+    @JsonView({Views.Admin.class, Views.Client.class})
     private String email;
+
+    @JsonView({Views.Admin.class, Views.Client.class})
+    private boolean isActivated = false;
 
 }
 
